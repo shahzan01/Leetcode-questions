@@ -1,18 +1,22 @@
-class Solution {
-    public int rob(int[] arr) {
+public class Solution {
+    public int rob(int[] nums) {
+        int n = nums.length;
+        if (n == 0) {
+            return 0;
+        } else if (n == 1) {
+            return nums[0];
+        } else if (n == 2) {
+            return Math.max(nums[0], nums[1]);
+        }
 
-int rob=0;
-int norob=0;
-for(int i = 0; i < arr.length; i++){
-    int newrob=norob+arr[i];
-    int newnorob=Math.max(rob,norob);
-    rob=newrob;
-    norob=newnorob;
-}
-return Math.max(rob,norob);
+        int[] dp = new int[n];
+        dp[0] = nums[0];
+        dp[1] = Math.max(nums[0], nums[1]);
 
+        for (int i = 2; i < n; ++i) {
+            dp[i] = Math.max(dp[i-1], dp[i-2] + nums[i]);
+        }
 
-
-
+        return dp[n-1];
     }
 }
