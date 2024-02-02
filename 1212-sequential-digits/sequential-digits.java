@@ -1,39 +1,21 @@
 class Solution {
-    public List<Integer> sequentialDigits(int min, int max) {
- int dmin = (int) (Math.log10(min) + 1);
-        int dmax = (int) (Math.log10(max) + 1);
-        List<Integer> al = new ArrayList<>();
-        String arr[] = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-        for (int x = dmin; x <= dmax; x++) {
-            int digit = x;
+    public List<Integer> sequentialDigits(int low, int high) {
+        List<Integer> a = new ArrayList<>();
 
-            for (int i = 1; i < arr.length - digit + 1; i++) {
-                int k = 0;
-                String ans = "";
-                while (k < digit) {
-                    ans += arr[i + k];
-                    k++;
+        for (int i = 1; i <= 9; ++i) {
+            int num = i;
+            int nextDigit = i + 1;
+
+            while (num <= high && nextDigit <= 9) {
+                num = num * 10 + nextDigit;
+                if (low <= num && num <= high) {
+                    a.add(num);
                 }
-               int o = Integer.parseInt(ans);
-                if (o >= min && o <= max) {
-                    al.add(o);
-                }
+                ++nextDigit;
             }
         }
-       
 
-
-
-
-
-return al;
-
-
-
-
-
-
-
-
+        a.sort(null);
+        return a;
     }
 }
