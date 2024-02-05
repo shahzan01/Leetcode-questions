@@ -1,16 +1,22 @@
 class Solution {
     public int firstUniqChar(String s) {
-
- HashMap<Character, Integer> hm = new HashMap<>();
-        for (int i = 0; i < s.length(); i++) {
-            char curr = s.charAt(i);
-            hm.put(curr, hm.getOrDefault(curr, 0) + 1);
+int count[] = new int[26];
+       
+        for (int i = 1; i <=s.length(); i++) {
+            int curr = s.charAt(i-1) - 'a';
+            if (count[curr] == 0) {
+                count[curr] = -i;
+            } else {
+                count[curr] = i;
+            }
         }
-        for (int i = 0; i < s.length(); i++) {
-            char curr = s.charAt(i);
-            if(hm.get(curr)==1){return i;}
+        int ans = Integer.MAX_VALUE;
+        for (int i = 0; i < 26; i++) {
+            if (count[i] < 0) {
+                ans = Math.min(ans, -count[i]);
+            }
         }
-return -1;
+ return ans == Integer.MAX_VALUE ? -1 : ans-1;
 
 
 
