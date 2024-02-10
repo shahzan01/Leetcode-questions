@@ -1,43 +1,20 @@
 class Solution {
-  static boolean ispalindrome(String st) {
-        int l = st.length();
-        if (l == 1) {
-            return true;
+    public int countSubstrings(String s) {
+        int n = s.length();
+        int ans = 0;
+        for(int i=0;i<n;i++) {
+            int even = palindromeCount(s, i, i+1);
+            int odd = palindromeCount(s, i-1, i+1);
+            ans += even + odd + 1;
         }
-        int i = 0;
-        int j = st.length() - 1;
-        while (i < j) {
-            if (st.charAt(i) != st.charAt(j)) {
-                return false;
-            }
-            i++;
-            j--;
-        }
-
-        return true;
-
+        return ans;
     }
 
-
-
-    public int countSubstrings(String s) {
-      int ans = 0;
-        for (int i = 0; i < s.length(); i++) {
-            StringBuilder sb = new StringBuilder();
-            for (int j = i; j < s.length(); j++) {
-                sb.append(s.charAt(j));
-
-                if (ispalindrome(sb.toString())) {
-                    ans++;
-                }
-            }
-
-        }    
-
-return ans;
-
-
-
-        
+    public int palindromeCount(String s, int left, int right) {
+        int count = 0;
+        while(left >= 0 && right < s.length() && s.charAt(left--) == s.charAt(right++)) {
+            count++;
+        }
+        return count;
     }
 }
