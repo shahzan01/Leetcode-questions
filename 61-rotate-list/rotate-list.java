@@ -21,7 +21,7 @@ while(temp!=null){
     size++;
     temp=temp.next;
 }
-if(k>size){while(k>size){k=k-size;}}
+if(k>size){k=k%size;}
 if(k==size || k==0){return head;}
 temp=head;
 if(k<size){int loop=size-k;
