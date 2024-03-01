@@ -1,28 +1,26 @@
 class Solution {
     public String maximumOddBinaryNumber(String s) {
-        HashMap<Character, Integer> hm = new HashMap<>();
-        for (int i = 0; i < s.length(); i++) {
-            hm.put(s.charAt(i), hm.getOrDefault(s.charAt(i), 0) + 1);
-        }
-        StringBuilder sb = new StringBuilder();
-        if(hm.containsKey('1')){
-        int n = hm.get('1') - 1;
+   StringBuilder sb = new StringBuilder(s);
+        int i = 0;
+        int j = s.length() - 1;
+        while (i < j) {
+            while (i < j && sb.charAt(i) == '1') {
+                i++;
 
-        for (int i = 0; i < n; i++) {
-            sb.append("1");
-        }
-    }
-        if (hm.containsKey('0')) {
-            for (int i = 0; i < hm.get('0'); i++) {
-                sb.append("0");
+            }
+            while (i < j && sb.charAt(j) == '0') {
+                j--;
+
+            }
+            if (i != j) {
+                sb.setCharAt(i, '1');
+                sb.setCharAt(j, '0');
             }
         }
-         if(hm.containsKey('1')){  sb.append("1");}
-      
-     return   sb.toString();
-
-
-
-
+        if (sb.charAt(i) == '0') {
+            sb.setCharAt(i - 1, '0');
+            sb.setCharAt(s.length() - 1, '1');
+        }
+        return  sb.toString();
     }
 }
