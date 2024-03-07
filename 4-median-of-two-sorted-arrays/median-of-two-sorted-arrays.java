@@ -1,33 +1,39 @@
 class Solution {
+     static double median(int[] arr1, int arr2[]) {
+        if (arr2.length < arr1.length) {
+            return median(arr2, arr1);
+        }
+
+        int req = (arr1.length + arr2.length + 1) / 2;
+        int low = 0;
+        int high = arr1.length;
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            int mid2 = req - mid;
+            int l1 = (mid  > 0 ? arr1[mid - 1] : Integer.MIN_VALUE);
+            int l2 = (mid2 > 0 ? arr2[mid2 - 1] : Integer.MIN_VALUE);
+            int r1 = (mid < arr1.length) ? arr1[mid] : Integer.MAX_VALUE;
+            int r2 = (mid2 < arr2.length) ? arr2[mid2] : Integer.MAX_VALUE;
+
+            if (l1 <= r2 && l2 <= r1) {
+                if ((arr1.length + arr2.length) % 2 == 0) {
+                    return (double) (Math.max(l1, l2) + Math.min(r1, r2)) / 2;
+                } else {
+                    return Math.max(l1, l2);
+                }
+
+            } else if (l1 > r2) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+
+        }
+        return (double) -1;
+    }
     public double findMedianSortedArrays(int[] arr1, int[] arr2) {
-        
 
-
-int m=arr1.length;
-int n=arr2.length;
-int ans[]=new int[m+n];
-int i=0;
-int j=0;
-int k=0;
-while(i<m &&j<n){
-    if(arr1[i]<arr2[j]){ans[k]=arr1[i];k++;i++;}
-    else{ans[k]=arr2[j];k++;j++;}
-}
-while (i<m) {
-ans[k++]=arr1[i++];    
-}
-while (j<n) {
-    ans[k++]=arr2[j++];
-    
-}
-double med;
-if(ans.length%2 != 0){
-med=ans[ans.length/2];
-}
-else{med=(double)((ans[(m + n) / 2]+ans[((m + n) / 2) - 1]))/2;}
-
-return med;
-
+return median(arr1, arr2);
 
 
 
