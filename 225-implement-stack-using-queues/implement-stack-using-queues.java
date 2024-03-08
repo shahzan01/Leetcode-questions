@@ -9,15 +9,12 @@ class MyStack {
     public void push(int x) {
         
          if(size==0){q.add(x);size++;}
-         else{ Queue<Integer> q2=new LinkedList<>();
-while(  !q.isEmpty()){
-    q2.add(q.poll());
-}
-q.add(x);
-size++;
-while(  !q2.isEmpty()){
-    q.add(q2.poll());
-}
+         else{ q.add(x);size++;
+          for (int i = 0; i < size-1; i++) {
+            q.add(q.poll());
+        }
+
+
          }
     }
     
