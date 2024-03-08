@@ -4,23 +4,22 @@ class Solution {
         for (int i = 0; i < arr.length; i++) {
             hm.put(arr[i], hm.getOrDefault(arr[i], 0) + 1);
         }
-        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> hm.get(b) - hm.get(a));
-
+        int max = Integer.MIN_VALUE;
+        int f = 0;
         for (Integer i : hm.keySet()) {
-            pq.add(i);
-        }
-        int ans = 0;
-
-        while (!pq.isEmpty() && !hm.isEmpty()) {
-            int cur = pq.poll();
-            int frq = hm.get(cur);
-            ans += frq;
-            if (!pq.isEmpty() && hm.get(pq.peek()) == frq) {
-                continue;
+            int cur = hm.get(i);
+            if (cur > max) {
+                f = cur;
+                max = cur;
+            } else if (cur == max) {
+                f += cur;
             } else {
-                break;
+                continue;
             }
+
         }
-        return ans;
+return f;
+
+      
     }
 }
