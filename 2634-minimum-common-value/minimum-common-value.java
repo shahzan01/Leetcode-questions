@@ -9,7 +9,9 @@ class Solution {
         if (n == 0 || m == 0) {
             return -1;
         }
-      
+        if (arr1[0] > arr2[m - 1] || arr1[n - 1] < arr2[0]) {
+            return -1;
+        }
 
         for (int i = 0; i < arr1.length; i++) {
             int cur = arr1[i];
