@@ -15,6 +15,7 @@ class Solution {
 
         for (int i = 0; i < arr1.length; i++) {
             int cur = arr1[i];
+                if(cur>arr2[m-1] || cur<arr2[0]){continue;}
             int low = 0;
             int high = m - 1;
             while (low <= high) {
