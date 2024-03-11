@@ -7,24 +7,16 @@ class Solution {
         }
         System.out.println(hm);
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < order.length(); i++) {
+       for (int i = 0; i < order.length(); i++) {
             char c = order.charAt(i);
             if (hm.containsKey(c)) {
-                int fre = hm.get(c);
-                while (fre > 0) {
-                    sb.append(c);
-                    fre--;
-                }
+                sb.append(String.valueOf(c).repeat(hm.get(c)));
                 hm.remove(c);
             }
         }
 
         for (Character cur : hm.keySet()) {
-            int fre = hm.get(cur);
-            while (fre > 0) {
-                sb.append(cur);
-                fre--;
-            }
+            sb.append(String.valueOf(cur).repeat(hm.get(cur)));
         }
         return sb.toString();
     }
