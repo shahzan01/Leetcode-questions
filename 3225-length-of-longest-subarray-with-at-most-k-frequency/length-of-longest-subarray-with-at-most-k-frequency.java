@@ -6,7 +6,8 @@ class Solution {
         while (i < arr.length) {
             freq.put(arr[i], freq.getOrDefault(arr[i], 0) + 1);
             while (j <= i && freq.get(arr[i]) > k) {
-                freq.put(arr[j], freq.get(arr[j]) - 1);
+                 int a =freq.get(arr[j]);
+                freq.put(arr[j], a-1);
                 j++;
                 
             }
