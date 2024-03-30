@@ -7,7 +7,7 @@ class Solution {static int helper(int arr[], int k) {
         while (i < n) {
             hm.put(arr[i], hm.getOrDefault(arr[i], 0) + 1);
 
-            while (hm.size() > k) {
+            while (hm.size() > k &&j<=i) {
                 if (hm.get(arr[j]) - 1 == 0) {
                     hm.remove(arr[j]);
                 } else {
