@@ -8,12 +8,12 @@ class Solution {
             return true;
         }
         visit[i][j] = true;
-        boolean up = helper(board, s, i - 1, j, cur + 1, visit);
-        boolean down = helper(board, s, i + 1, j, cur + 1, visit);
-        boolean right = helper(board, s, i, j + 1, cur + 1, visit);
-        boolean left = helper(board, s, i, j - 1, cur + 1, visit);
+    if(helper(board, s, i - 1, j, cur + 1, visit) || helper(board, s, i + 1, j, cur + 1, visit) || helper(board, s, i, j + 1, cur + 1, visit) || helper(board, s, i, j - 1, cur + 1, visit))
+{return true;}
+
         visit[i][j] = false;
-        return right | left | up | down;
+      return false;
+     
 
     }
 
