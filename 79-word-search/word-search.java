@@ -26,6 +26,7 @@ class Solution {
                     if (helper(board, s, i, j, 0, visit)) {
                        return true;
                     }
+                    else{continue;}
                 }
             }
         }
