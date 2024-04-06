@@ -11,7 +11,7 @@ class Solution {
     }
     public String minRemoveToMakeValid(String s) {
       char arr[] = s.toCharArray();
-        StringBuilder sb = new StringBuilder(s);
+      
         Stack st = new Stack<>();
         for (int i = 0; i < s.length(); i++) {
             char cur = arr[i];
