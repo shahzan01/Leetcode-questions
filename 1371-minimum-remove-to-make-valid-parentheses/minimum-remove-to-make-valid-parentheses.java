@@ -1,16 +1,7 @@
 class Solution {
-      static class info {
-        char c;
-        int idx;
-
-        info(char ch, int i) {
-            this.c = ch;
-            this.idx = i;
-        }
-
-    }
+     
     public String minRemoveToMakeValid(String s) {
-     char arr[] = s.toCharArray();
+    
         StringBuilder sb = new StringBuilder();
         Stack st = new Stack<>();
         int left = 0;
