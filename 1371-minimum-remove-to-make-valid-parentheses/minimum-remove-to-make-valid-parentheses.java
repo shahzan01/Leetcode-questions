@@ -10,48 +10,38 @@ class Solution {
 
     }
     public String minRemoveToMakeValid(String s) {
-      char arr[] = s.toCharArray();
-      
+     char arr[] = s.toCharArray();
+        StringBuilder sb = new StringBuilder();
         Stack st = new Stack<>();
+        int left = 0;
+        int right = 0;
+
         for (int i = 0; i < s.length(); i++) {
-            char cur = arr[i];
-            if (cur == '(') {
-                st.push(new info(cur, i));
+            char c = s.charAt(i);
+            if (c == '(') {
+                left++;
+            }
+            if (c == ')') {
+                right++;
+            }
+            if (right > left) {
+                right--;
                 continue;
-            }
-            if (cur == ')') {
-                if (st.isEmpty()) {
-                    arr[i] = '*';
 
-                    continue;
-                }
-                info a = (info) st.peek();
-                while (!st.isEmpty() && a.c != '(') {
-                    a = (info) st.pop();
-                    int x = a.idx;
-                    arr[x] = '*';
-                }
-                if (st.isEmpty()) {
-                    arr[i] = '*';
-                    continue;
-                } else {
-                    st.pop();
-                }
-
+            } else {
+                st.push(c);
             }
 
-        }
-        while (!st.isEmpty()) {
-            info a = (info) st.pop();
-            arr[a.idx] = '*';
         }
         String ans = "";
-        for (int i = 0; i < arr.length; i++) {
-
-            if (arr[i] == '*') {
-                continue;
+        while (!st.isEmpty()) {
+            char c = (char) st.pop();
+            if (left > right && c == '(') {
+                left--;
+            } else {
+                sb.append(c);
             }
-            ans += arr[i];
-        }return ans;
+
+        }return sb.reverse().toString();
     }
 }
