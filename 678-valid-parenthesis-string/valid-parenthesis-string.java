@@ -1,45 +1,30 @@
 class Solution {
-     static boolean twostack(String s) {
-        Stack st = new Stack<>();
-        Stack st1 = new Stack<>();
-
+       static boolean towpointer(String s) {
+        int n = s.length();
+        int open = 0, close = 0;
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
-            if (c == '(') {
-                st.push(i);
-                continue;
-            } else if (c == '*') {
-                st1.push(i);
-                continue;
+            char d = s.charAt(n - i - 1);
+            if (c == '(' || c == '*') {
+                open++;
             } else {
-                if (st.isEmpty() && st1.isEmpty()) {
-                    return false;
-                }
-                if (st.isEmpty()) {
-                    st1.pop();
-                } else {
-                    st.pop();
-                }
+                open--;
+            }
+            if (d == ')' || d == '*') {
+                close++;
+            } else {
+                close--;
+            }
 
+            if (open < 0 || close < 0) {
+                return false;
             }
+
         }
-        if (st.isEmpty()) {
-            return true;
-        } else {
-            while (!st.isEmpty() && !st1.isEmpty()) {
-                if ((int) st.pop() > (int) st1.pop()) {
-                    return false;
-                }
-                continue;
-            }
-        }
-        if (st.isEmpty()) {
-            return true;
-        }
-        return false;
+        return true;
 
     }
     public boolean checkValidString(String s) {
-        return twostack(s);
+        return towpointer(s);
     }
 }
