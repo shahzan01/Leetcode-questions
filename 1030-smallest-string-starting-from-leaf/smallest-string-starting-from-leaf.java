@@ -15,18 +15,20 @@
  */
 class Solution {
    static String min="";
-    static void helper(TreeNode root ,StringBuilder sb){
+    static void helper(TreeNode root ,StringBuilder sb,StringBuilder ans){
         if(root==null){return ;}
          sb.append((char) ('a' + root.val));
 if(root.left==null && root.right==null){
     String s=sb.reverse().toString();
     sb.reverse();
-    if(min.length()==0 || s.compareTo(min)<0){
-    min=s;}
+    if(ans.length()==0 || s.compareTo(ans.toString())<0){
+       ans.setLength(0);
+       ans.append(s); 
+    }
 }
 
-helper(root.left,sb);
-helper(root.right,sb);
+helper(root.left,sb,ans);
+helper(root.right,sb,ans);
 
 sb.deleteCharAt(sb.length() - 1);
 
@@ -36,8 +38,8 @@ sb.deleteCharAt(sb.length() - 1);
     }
     public String smallestFromLeaf(TreeNode root) {
               StringBuilder sb = new StringBuilder();
-              min="";
-         helper(root,sb);
-         return min;
+               StringBuilder ans = new StringBuilder();
+         helper(root,sb,ans);
+         return ans.toString();
     }
 }
