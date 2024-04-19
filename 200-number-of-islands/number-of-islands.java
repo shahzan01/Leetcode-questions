@@ -1,26 +1,25 @@
 class Solution {
-    static void dfs(char arr[][], boolean visit[][], int i, int j) {
-        if (i < 0 || j < 0 || i >= arr.length || j >= arr[0].length || arr[i][j] == '0' || visit[i][j]) {
+ static void dfs(char arr[][], int i, int j) {
+        if (i < 0 || j < 0 || i >= arr.length || j >= arr[0].length || arr[i][j] == '0') {
             return;
         }
-        visit[i][j] = true;
-        dfs(arr, visit, i + 1, j);
-        dfs(arr, visit, i - 1, j);
-        dfs(arr, visit, i, j + 1);
-        dfs(arr, visit, i, j - 1);
+        arr[i][j] = '0';
+        dfs(arr, i + 1, j);
+        dfs(arr, i - 1, j);
+        dfs(arr, i, j + 1);
+        dfs(arr, i, j - 1);
 
     }
     public int numIslands(char[][] arr) {
           int ans = 0;
-        boolean visit[][] = new boolean[arr.length][arr[0].length];
-
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[0].length; j++) {
-                if (arr[i][j] == '1' && !visit[i][j]) {
+                if (arr[i][j] == '1') {
                     ans++;
-                    dfs(arr, visit, i, j);
+                    dfs(arr, i, j);
                 }
             }
-        }return ans;
+        }
+        return ans;
     }
 }
