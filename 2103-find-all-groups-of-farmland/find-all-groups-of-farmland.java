@@ -7,9 +7,9 @@ class Solution {
         cor[3] = Math.max(cor[3], j);
         arr[i][j] = 0;
         dfs(arr, i + 1, j, cor);
-        dfs(arr, i - 1, j, cor);
+      
         dfs(arr, i, j + 1, cor);
-        dfs(arr, i, j - 1, cor);
+     
 
     }
     public int[][] findFarmland(int[][] arr) {
