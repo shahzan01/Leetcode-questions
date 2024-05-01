@@ -17,7 +17,7 @@ class Solution {
         } else {
             sb.append(s.substring(0, idx + 1));
             sb.reverse();
-            sb.append(s.substring(idx + 1, s.length()));
+            sb.append(s.substring(idx + 1));
         }
        return sb.toString();
     }
