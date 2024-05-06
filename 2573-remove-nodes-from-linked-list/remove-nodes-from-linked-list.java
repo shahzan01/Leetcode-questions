@@ -16,22 +16,27 @@ int m=fxn(h.next);
 if(m>h.val){h.val=-1;}
 return Math.max(m,h.val);
 
-}
+} 
+  public ListNode removeNodes(ListNode head) {
+  if(head.next==null){return head;}     
+Stack<Integer> st=new Stack<>();
+ListNode t=head;
 
-
-    public ListNode removeNodes(ListNode head) {
-        fxn(head);
-       ListNode n=new ListNode(0);
-       n.next=head; 
-ListNode temp=n;
-ListNode prev=n;
-while(temp.next!=null){
-  
-    if(temp.val==-1){prev.next=temp.next;}
- else{prev=temp;}
-    temp=temp.next;
+while(t!=null){
+    int a=t.val;
+    while (!st.isEmpty() && st.peek()<a) {
+    st.pop();
 }
-return n.next;
+st.push(a);
+t=t.next;
+}
+ t=null;
+while(!st.isEmpty()){
+    ListNode n=new ListNode(st.pop());
+n.next=t;
+t=n;
+}
+return t;
 
 
 
