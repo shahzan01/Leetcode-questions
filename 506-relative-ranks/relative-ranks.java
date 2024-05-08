@@ -1,15 +1,15 @@
 class Solution {
     public String[] findRelativeRanks(int[] arr) {
-          HashMap<Integer, Integer> hm = new HashMap<>();
-        for (int i = 0; i < arr.length; i++) {
-            hm.put(arr[i], i);
+       PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> arr[b] - arr[a]);
+       for (int i = 0; i < arr.length; i++) {
+            pq.add(i);
         }
-        Arrays.sort(arr);
-          System.out.println(hm);
+      
+    
         String[] ans = new String[arr.length];
         int count = 1;
         for (int i = arr.length - 1; i >= 0; i--) {
-            int idx = hm.get(arr[i]);
+            int idx = pq.poll();
             if (count == 1) {
                 ans[idx] = "Gold Medal";
             } else if (count == 2) {
