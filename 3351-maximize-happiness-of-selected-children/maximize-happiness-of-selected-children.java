@@ -7,6 +7,7 @@ class Solution {
         int minus = 0;
         while (k > 0) {
           if((arr[i]-minus)>=0){ans+=(arr[i]-minus);}
+          else{break;}
             minus++;
             i--;
             k--;
