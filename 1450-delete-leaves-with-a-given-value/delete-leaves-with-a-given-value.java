@@ -33,21 +33,29 @@ if(r==true){root.right=null;ch=true;}
 return false;
 
  }
+static TreeNode dfs1(TreeNode root,int tar){
+    if(root==null){return null;}
+if(root.left==null && root.right==null){if(root.val==tar){return null;}return root;}
+
+TreeNode l=dfs1(root.left,tar);
+TreeNode r=dfs1(root.right,tar);
+root.left=l;
+root.right=r;
+
+if(root.left==null && root.right==null && root.val==tar){return null;}
+return root;
+
+}
+
+
 
 
     public TreeNode removeLeafNodes(TreeNode root, int target) {
- ch=true;
-while(ch==true){
-    System.out.println("sdfsdf");
-    ch=false;
-dfs(root,target);
-}
-
-  
-
-if(root.left==null && root.right==null && root.val==target){return null;}
 
 
-        return root;
+
+return dfs1(root,target);
+
+
     }
 }
