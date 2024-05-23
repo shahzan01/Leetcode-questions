@@ -1,44 +1,41 @@
 class Solution {
-      static void allsubset(int arr[], int i, ArrayList<ArrayList<Integer>> al, ArrayList<Integer> temp) {
+     static int allsubset(int arr[], int i, ArrayList<Integer> temp, HashMap<Integer, Integer> hm, int k) {
 
         if (i >= arr.length) {
-
-            al.add(new ArrayList<>(temp));
-
-            return;
+            if (temp.size() == 0) {
+                return 0;
+            }
+            return 1;
+        }
+        if (!hm.isEmpty() && hm.containsKey(arr[i])) {
+            return allsubset(arr, i + 1, temp, hm, k);
         }
 
-        allsubset(arr, i + 1, al, temp);
+        int ans1 = allsubset(arr, i + 1, temp, hm, k);
         temp.add(arr[i]);
-        allsubset(arr, i + 1, al, temp);
+        int a = arr[i] - k;
+        int b = arr[i] + k;
+        hm.put(a, hm.getOrDefault(a, 0) + 1);
+        hm.put(b, hm.getOrDefault(b, 0) + 1);
+        int ans2 = allsubset(arr, i + 1, temp, hm, k);
         temp.remove(temp.size() - 1);
-        return;
+        if (hm.get(a) == 1) {
+            hm.remove(a);
+        } else {
+            hm.put(a, hm.get(a) - 1);
+        }
+        if (hm.get(b) == 1) {
+            hm.remove(b);
+        } else {
+            hm.put(b, hm.get(b) - 1);
+        }
+        return ans1 + ans2;
 
     }
     public int beautifulSubsets(int[] arr, int k) {
-          ArrayList<ArrayList<Integer>> al = new ArrayList<>();
+ ArrayList<ArrayList<Integer>> al = new ArrayList<>();
         ArrayList<Integer> temp = new ArrayList<>();
-        allsubset(arr, 0, al, temp);
-        int ans = 0;
-        r: for (ArrayList<Integer> i : al) {
-            if (i.size() == 0) {
-                continue;
-            }
-            if (i.size() == 1) {
-                ans++;
-                continue;
-            }
-            for (int j = 0; j < i.size(); j++) {
-                for (int n = j + 1; n < i.size(); n++) {
-                    int dif = Math.abs(i.get(j) - i.get(n));
-                    if (dif == k) {
-                        continue r;
-                    }
-                }
-            }
-            ans++;
-
-        }
-return ans;
+        HashMap<Integer, Integer> hm = new HashMap<>();
+        return allsubset(arr, 0, temp, hm, k);
     }
 }
