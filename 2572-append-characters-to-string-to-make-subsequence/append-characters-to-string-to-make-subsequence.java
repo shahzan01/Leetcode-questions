@@ -11,9 +11,6 @@ class Solution {
 
         }
 
-        while (j < t.length()) {
-            ans++;
-            j++;
-        }return ans;
+   ans += (t.length() - j);return ans;
     }
 }
