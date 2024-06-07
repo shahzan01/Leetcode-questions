@@ -5,22 +5,24 @@ class Solution {
             hs.add(s);
         }
         StringBuilder sb = new StringBuilder();
-        String arr[] = sen.split(" ");
+         String arr[] = sen.split(" ");
         l: for (int i = 0; i < arr.length; i++) {
             String cur = arr[i];
-            for (int j = 0; j <= cur.length(); j++) {
-                String sub = cur.substring(0, j);
-                if (hs.contains(sub)) {
-                    arr[i] = sub;
-                    sb.append(sub + " ");
+            StringBuilder temp = new StringBuilder();
+            for (int j = 0; j < cur.length(); j++) {
+                temp.append(cur.charAt(j));
+
+                if (hs.contains(temp.toString())) {
+                    arr[i] = temp.toString();
+                    sb.append(temp + " ");
                     continue l;
                 }
 
             }
             sb.append(arr[i] + " ");
         }
-        sb.delete(sb.length()-1, sb.length() );
-        System.out.println(sb);
+        sb.delete(sb.length() - 1, sb.length());
+       
         return sb.toString();
     }
 }
