@@ -9,7 +9,7 @@ class Solution {
             sum +=arr[i];
             int mod = (sum % k);
             if (mod < 0) {
-                mod = (mod + k) % k;
+                mod = (mod + k);
             }
             if (hm.containsKey(mod)) {
 
