@@ -1,15 +1,26 @@
 class Solution {
     public int heightChecker(int[] arr) {
-             int sortedArr[] = new int[arr.length];
+         int freq[] = new int[101];
         for (int i = 0; i < arr.length; i++) {
-            sortedArr[i] = arr[i];
+            freq[arr[i]]++;
         }
-        Arrays.sort(sortedArr);
         int ans = 0;
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] != sortedArr[i]) {
-                ans++;
+        int idx = 0;
+        for (int i = 0; i < freq.length; i++) {
+            int currFreq = freq[i];
+
+            while (currFreq > 0) {
+                if (arr[idx] != i) {
+                    ans++;
+                }
+                idx++;
+                currFreq--;
             }
-        }return ans;
+
+        }
+
+        
+        
+        return ans;
     }
 }
