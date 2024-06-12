@@ -11,7 +11,50 @@ class Solution {
             endOFWord = false;
         }
     }
-       static boolean fn(String s, int i, int j, HashSet<String> hs, int dp[][]) {
+ static node root = new node();
+
+    static void insert(String s) {
+        node cur = root;
+        for (int i = 0; i < s.length(); i++) {
+            int idx = s.charAt(i) - 'a';
+            if (cur.child[idx] == null) {
+                node n = new node();
+                cur.child[idx] = n;
+            }
+            cur = cur.child[idx];
+        }
+        cur.endOFWord = true;
+    }
+
+    static boolean search(String s) {
+        node cur = root;
+        for (int i = 0; i < s.length(); i++) {
+            int idx = s.charAt(i) - 'a';
+            if (cur.child[idx] == null) {
+                return false;
+            }
+            cur = cur.child[idx];
+        }
+        return cur.endOFWord;
+    }
+
+    static boolean searchwith(String s) {
+        node cur = root;
+        for (int i = 0; i < s.length(); i++) {
+            int idx = s.charAt(i) - 'a';
+            if (cur.child[idx] == null) {
+                return false;
+            }
+            cur = cur.child[idx];
+        }
+        return true;
+    }
+
+
+
+
+
+       static boolean fn(String s, int i, int j, int dp[][]) {
         if (i >= s.length() || j >= s.length()) {
             return true;
         }
@@ -22,8 +65,8 @@ class Solution {
         for (int k = j; k <= s.length(); k++) {
             String sub = s.substring(i, k);
 
-            if (hs.contains(sub)) {
-                ans = ans || fn(s, k, k, hs, dp);
+            if (search(sub)) {
+                ans = ans || fn(s, k, k, dp);
             }
 
         }
@@ -33,17 +76,16 @@ class Solution {
 
     }
 
-
     public boolean wordBreak(String s, List<String> dic) {
-         HashSet<String> hs = new HashSet<>();
+        root=new node();         HashSet<String> hs = new HashSet<>();
         for (String i : dic) {
-            hs.add(i);
+           insert(i);
         }
         int dp[][] = new int[s.length() + 1][s.length() + 1];
         for (int[] i : dp) {
             Arrays.fill(i, -1);
         }
-        return fn(s, 0, 0, hs,dp);
+        return fn(s, 0, 0,dp);
 
     }
 }
