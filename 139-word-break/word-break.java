@@ -1,4 +1,16 @@
 class Solution {
+    
+    static class node {
+        node child[] = new node[26];
+        boolean endOFWord;
+
+        node() {
+            for (node n : child) {
+                n = null;
+            }
+            endOFWord = false;
+        }
+    }
        static boolean fn(String s, int i, int j, HashSet<String> hs, int dp[][]) {
         if (i >= s.length() || j >= s.length()) {
             return true;
