@@ -1,6 +1,7 @@
 class Solution {
     public void sortColors(int[] arr) {
-        int low = 0;
+       
+         int low = 0;
         int high = arr.length - 1;
         int mid = 0;
         while (mid <= high) {
@@ -22,6 +23,6 @@ class Solution {
             }
 
         }
- 
+
     }
 }
