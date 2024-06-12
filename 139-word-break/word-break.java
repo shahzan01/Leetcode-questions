@@ -26,9 +26,9 @@ class Solution {
         cur.endOFWord = true;
     }
 
-    static boolean search(String s) {
+    static boolean search(String s,int x,int y) {
         node cur = root;
-        for (int i = 0; i < s.length(); i++) {
+        for ( int i=x ; i < y; i++) {
             int idx = s.charAt(i) - 'a';
             if (cur.child[idx] == null) {
                 return false;
@@ -65,7 +65,7 @@ class Solution {
         for (int k = j; k <= s.length(); k++) {
             String sub = s.substring(i, k);
 
-            if (search(sub)) {
+            if (search(s,i,k)) {
                 ans = ans || fn(s, k, k, dp);
             }
 
@@ -77,7 +77,7 @@ class Solution {
     }
 
     public boolean wordBreak(String s, List<String> dic) {
-        root=new node();         HashSet<String> hs = new HashSet<>();
+        root=new node();         
         for (String i : dic) {
            insert(i);
         }
