@@ -38,16 +38,29 @@ class Solution {
         return cur.endOFWord;
     }
 
-    static boolean searchwith(String s) {
+static class p {
+        boolean  end;
+        boolean ans;
+
+        public p(boolean  e, boolean a) {
+            this.end = e;
+            this.ans = a;
+        }
+
+    }
+    static p searchwith(String s) {
         node cur = root;
+        p n=new p(false,false);
         for (int i = 0; i < s.length(); i++) {
             int idx = s.charAt(i) - 'a';
             if (cur.child[idx] == null) {
-                return false;
+                return n;
             }
             cur = cur.child[idx];
         }
-        return true;
+        n.ans=true;
+        if(cur.endOFWord==true){n.end=true;}
+        return n;
     }
 
  static void helper(char[][] board, int i, int j, boolean visit[][], HashSet<String> hs, StringBuilder sb) {
@@ -58,9 +71,9 @@ class Solution {
         sb.append(board[i][j]);
         visit[i][j] = true;
         String cur = sb.toString();
-
- if (searchwith(cur)) {
- if (search(cur)) {
+p n=searchwith(cur);
+ if (n.ans==true) {
+ if (n.end==true) {
                 hs.add(cur);
             }
             helper(board, i + 1, j, visit, hs, sb);
