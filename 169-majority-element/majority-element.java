@@ -1,16 +1,16 @@
 class Solution {
-    public int majorityElement(int[] nums) {
-
+    public int majorityElement(int[] arr) {
+         int majority = 0;
         int count = 0;
-        int majority = 0;
-        for (int i = 0; i < nums.length; i++) {
-            if (count == 0 && majority != nums[i]) {
-                majority = nums[i];
+        for (int i = 0; i < arr.length; i++) {
+            if (count == 0 && majority != arr[i]) {
+                majority = arr[i];
                 count = 1;
-            } else if (majority == nums[i]) {       
+            } else if (arr[i] == majority) {
                 count++;
             } else {
-                count--;}}
-        return majority;
+                count--;
+            }
+        }return majority;
     }
 }
