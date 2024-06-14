@@ -1,25 +1,38 @@
 class Solution {
     public int minIncrementForUnique(int[] arr) {
-         PriorityQueue<Integer> pq = new PriorityQueue<>();
-        HashSet<Integer> hs = new HashSet<>();
-        int ans = 0;
-        for (int i : arr) {
-            pq.add(i);
-
+             int sortedArr[] = new int[100001];
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < arr.length; i++) {
+            sortedArr[arr[i]]++;
+            max = Math.max(max, arr[i]);
         }
-        int max = pq.peek();
-        while (!pq.isEmpty()) {
-            int cur = pq.poll();
-            if (hs.contains(cur)) {
-                int diff = Math.abs(max - cur) + 1;
-                cur += diff;
-                ans += diff;
+        int idx = 0;
+        for (int i = 0; i <= max; i++) {
+            int freq = sortedArr[i];
+            while (freq > 0) {
+                arr[idx] = i;
+                idx++;
+                freq--;
             }
 
-            max = Math.max(max, cur);
+        }
+        
+        HashSet<Integer> hs = new HashSet<>();
+        int ans = 0;
 
-            hs.add(cur);
-           
+        max = arr[0];
+        for (int i = 0; i < arr.length; i++) {
+        int cur = arr[i];
+        if (hs.contains(cur)) {
+        int diff = Math.abs(max - cur) + 1;
+        cur += diff;
+        ans += diff;
+        }
+
+        max = Math.max(max, cur);
+
+        hs.add(cur);
+
         }return ans;
     }
 }
