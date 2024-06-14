@@ -16,23 +16,18 @@ class Solution {
             }
 
         }
-        
-        HashSet<Integer> hs = new HashSet<>();
         int ans = 0;
+        for (int i = 1; i < arr.length; i++) {
 
-        max = arr[0];
-        for (int i = 0; i < arr.length; i++) {
-        int cur = arr[i];
-        if (hs.contains(cur)) {
-        int diff = Math.abs(max - cur) + 1;
-        cur += diff;
-        ans += diff;
+            if (arr[i] <= arr[i - 1]) {
+
+                int diff = Math.abs(arr[i] - arr[i - 1]) + 1;
+                arr[i] += diff;
+                ans += diff;
+            }
+
         }
-
-        max = Math.max(max, cur);
-
-        hs.add(cur);
-
-        }return ans;
+        
+       return ans;
     }
 }
