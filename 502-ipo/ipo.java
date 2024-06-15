@@ -10,28 +10,30 @@ class Solution {
 
     }
     public int findMaximizedCapital(int k, int w, int[] profit, int[] capital) {
-         PriorityQueue<pair> pq = new PriorityQueue<>((a, b) -> a.capital - b.capital);
+        int arr[][] = new int[profit.length][2];
         PriorityQueue<pair> maxprofir = new PriorityQueue<>((a, b) -> b.profit - a.profit);
         for (int i = 0; i < capital.length; i++) {
-            pair p = new pair(capital[i], profit[i]);
-            pq.add(p);
+            arr[i][0] = capital[i];
+            arr[i][1] = profit[i];
         }
-        int tempw = 0;
+
+        Arrays.sort(arr, (a, b) -> a[0] - b[0]);
+
+      
+        int idx = 0;
         while (k > 0) {
-            while (tempw <= w) {
-                if (!pq.isEmpty() && pq.peek().capital == tempw) {
-
-                    maxprofir.add(pq.poll());
-
-                } else {
-                    tempw++;
-                }
-
+            while (idx < arr.length && arr[idx][0] <= w) {
+                maxprofir.add(new pair(arr[idx][0], arr[idx][1]));
+                idx++;
             }
-              if(maxprofir.isEmpty()){return w;}
+
+            if (maxprofir.isEmpty()) {
+                break;
+            }
             w += maxprofir.poll().profit;
             k--;
 
-        }return w;
+        }
+    return w;
     }
 }
