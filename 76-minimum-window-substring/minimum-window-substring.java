@@ -1,52 +1,46 @@
 class Solution {
-    public String minWindow(String s1, String s2) {
-         String ans = "";
-        if (s1.length() == 0 || s2.length() == 0 || s1.length() < s2.length()) {
-           return ans;
-        }
-        HashMap<Character, Integer> hm = new HashMap<>();
-        for (int i = 0; i < s2.length(); i++) {
-            hm.put(s2.charAt(i), hm.getOrDefault(s2.charAt(i), 0) + 1);
+    public String minWindow(String s, String t) {
+         HashMap<Character, Integer> hm_t = new HashMap<>();
+        for (int i = 0; i < t.length(); i++) {
+            char c = t.charAt(i);
+            hm_t.put(c, hm_t.getOrDefault(c, 0) + 1);
         }
 
-        int count = s2.length();
-        int start = 0, end = 0, startidx = 0, minlenght = Integer.MAX_VALUE;
-        while (end < s1.length()) {
+        int i = 0;
+        int j = 0;
+        int minlen = Integer.MAX_VALUE;
+        int count = t.length();
+        String ans = "";
+        while (i < s.length()) {
+            char c = s.charAt(i);
+            if (hm_t.containsKey(c)) {
+                if (hm_t.getOrDefault(c, 0) > 0) {
 
-            char cur = s1.charAt(end);
-            if (hm.getOrDefault(cur, 0) > 0) {
-                count--;
-            }
-            hm.put(cur, hm.getOrDefault(cur, 0) - 1);
-            end++;
-            while (count == 0) {
-                if (end - start < minlenght) {
-                    startidx = start;
-                    minlenght = end - start;
+                    count--;
                 }
-                char c = s1.charAt(start);
-                hm.put(c, hm.getOrDefault(c, 0) + 1);
-                if (hm.get(c) > 0) {
-                    count++;
+                hm_t.put(c, hm_t.get(c) - 1);
+            }
+
+            while (j <= i && count == 0) {
+
+                if ((i - j + 1) < minlen) {
+                    minlen = i - j + 1;
+                    ans = s.substring(j, i + 1);
 
                 }
-                start++;
+                char rem = s.charAt(j);
 
+                if (hm_t.containsKey(rem)) {
+                    hm_t.put(rem, hm_t.get(rem) + 1);
+                    if (hm_t.get(rem) > 0) {
+                        count++;
+                    }
+                }
+
+                j++;
             }
-           
-        }
 
-
-if(minlenght!=Integer.MAX_VALUE){ans = s1.substring(startidx, startidx + minlenght);return ans;}
-       else{return ans;}
-
-
-
-
-
-
-
-
-
+            i++;
+        }return ans;
     }
 }
