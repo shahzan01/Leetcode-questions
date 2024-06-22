@@ -1,37 +1,18 @@
 class Solution {
     public int numberOfSubarrays(int[] arr, int k) {
-         int i = 0;
-        int j = 0;
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = arr[i] % 2;
+        }
         int ans = 0;
-        int count = 0;
-        int left = 0;
-        int right = 0;
-
-        while (i < arr.length) {
-            if (arr[i] % 2 != 0) {
-                count++;
+        HashMap<Integer, Integer> freqofPrexSum = new HashMap<>();
+        int sum = 0;
+        freqofPrexSum.put(0, 1);
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+            if (freqofPrexSum.containsKey(sum - k)) {
+                ans += freqofPrexSum.get(sum - k);
             }
-            while (j <= i && count == k) {
-                if (arr[j] % 2 != 0) {
-                   right=0;
-                    while (i < arr.length - 1 && arr[i + 1] % 2 == 0) {
-                        i++;
-                        right++;
-                    }
-
-                    ans += (left + 1) * (right + 1);
-                    j++;
-                    count--;
-                    left=0;
-
-                } else {
-                    left++;
-                    j++;
-                }
-
-            }
-
-            i++;
+            freqofPrexSum.put(sum, freqofPrexSum.getOrDefault(sum, 0) + 1);
 
         }return ans;
     }
