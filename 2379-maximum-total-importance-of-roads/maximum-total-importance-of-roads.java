@@ -6,16 +6,12 @@ class Solution {
             freqArr[i[0]]++;
             freqArr[i[1]]++;
         }
-        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> freqArr[b] - freqArr[a]);
+        Arrays.sort(freqArr);
 
-        for (int i = 0; i < freqArr.length; i++) {
-            pq.add(i);
-        }
-
-        long ans = 0;
         int m = n;
-        while (!pq.isEmpty()) {
-            ans += (long)(m * (long)freqArr[pq.poll()]);
+        long ans = 0;
+        for (int i = n - 1; i >= 0; i--) {
+            ans += (long) m * freqArr[i];
             m--;
         }return ans;
     }
