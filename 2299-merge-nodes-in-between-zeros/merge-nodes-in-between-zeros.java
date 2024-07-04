@@ -10,27 +10,24 @@
  */
 class Solution {
     public ListNode mergeNodes(ListNode head) {
-ListNode ans=new ListNode();
-ListNode t=ans;
-int sum=0;
+        ListNode h=head;
+
+ListNode modify=head;
 head=head.next;
 while(head!=null){
-if(head.val==0){
-ListNode n=new ListNode(sum);
-t.next=n;
-t=n;
-sum=0;
+    int sum=0;
+    while(head.val!=0){
+        sum+=head.val;
+        head=head.next;
+    }
+    modify.next.val=sum;
+    modify=modify.next;
+    head=head.next;
 }
-else{
-    sum+=head.val;
-}
-head=head.next;
-}
+  modify.next=null;
+return h.next;
 
 
-
-
-return ans.next;
 
     }
 }
