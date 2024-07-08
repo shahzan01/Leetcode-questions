@@ -1,19 +1,13 @@
 class Solution {
-    public int findTheWinner(int n, int k) {
-         ArrayList<Integer> list = new ArrayList<>();
-        for (int i = 1; i <= n; i++) {
-            list.add(i);
+      static int f(int n, int k) {
+        if (n == 1) {
+            return 0;
         }
-        int cur = 0;
-        k--;
-        while (list.size() > 1) {
-            int remove = (cur + k) % list.size();
 
-            list.remove(remove);
-            cur = (remove) % list.size();
-            System.out.println(cur);
-            System.out.println(list);
-        }
-return list.get(0);
+        return (f((n - 1), k) + k) % n;
+
+    }
+    public int findTheWinner(int n, int k) {
+return f(n,k)+1;
     }
 }
