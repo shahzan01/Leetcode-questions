@@ -18,58 +18,21 @@ class Solution {
             int root = arr[0][0];
         HashMap<Integer, TreeNode> map = new HashMap<>();
         HashSet<Integer>children=new HashSet<>();
-        for (int[] is : arr) {
+ for (int[] is : arr) {
             int p = is[0];
             int c = is[1];
+            int isleft = is[2];
             children.add(c);
-            if (root == c) {
-                root = p;
+            TreeNode head = map.getOrDefault(p, new TreeNode(p));
+            TreeNode chi = map.getOrDefault(c, new TreeNode(c));
+            if (isleft == 1) {
+                head.left = chi;
+
+            } else {
+                head.right = chi;
             }
-            if (map.containsKey(p)) {
-
-                TreeNode head = map.get(p);
-                if (map.containsKey(c)) {
-
-                    if (is[2] == 1) {
-                        head.left = map.get(c);
-                    } else {
-                        head.right = map.get(c);
-                    }
-                } else {
-                    TreeNode n = new TreeNode(c);
-                    if (is[2] == 1) {
-                        head.left = n;
-                    } else {
-                        head.right = n;
-                    }
-                    map.put(c, n);
-                }
-
-            }
-
-            else {
-
-                TreeNode head = new TreeNode(p);
-                if (map.containsKey(c)) {
-
-                    if (is[2] == 1) {
-                        head.left = map.get(c);
-                    } else {
-                        head.right = map.get(c);
-                    }
-                } else {
-                    TreeNode n = new TreeNode(c);
-                    if (is[2] == 1) {
-
-                        head.left = n;
-                    } else {
-                        head.right = n;
-                    }
-                    map.put(c, n);
-                }
-                map.put(p, head);
-
-            }
+            map.put(c, chi);
+            map.put(p, head);
 
         }
        
