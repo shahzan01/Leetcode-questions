@@ -32,27 +32,28 @@ class Solution {
         if (root.right != null) {
             b = fxn(root.right, dis);
         }
-          int i = 0;
-        int j = 0;
-        while (i < a.size()) {
-            int cur = a.get(i);
-            for (int k = 0; k < b.size(); k++) {
-                if ((b.get(k) + cur) <= dis) {
+           for (int i = 0; i < a.size(); i++) {
+            for (int j = 0; j < b.size(); j++) {
+                if ((a.get(i) + b.get(j)) <= dis) {
                     count++;
                 }
             }
+        }
+        ArrayList<Integer> par = new ArrayList<>();
+        for (Integer i : a) {
+            if (i + 1 <= dis) {
+                par.add(i + 1);
+            }
+        }
+        for (Integer i : b) {
 
-            a.set(i, cur + 1);
-            i++;
+            if ((i + 1) <= dis) {
+                par.add(i + 1);
+            }
 
         }
-        while (j < b.size()) {
-            a.add(b.get(j) + 1);
-            j++;
-        }
 
-        System.out.println(a);
-        return a;
+        return par;
 
     }
     public int countPairs(TreeNode root, int distance) {
