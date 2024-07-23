@@ -10,10 +10,10 @@ HashSet<String>hs=new HashSet<>();
             if (map.containsKey(c) && !map.get(c).equals(arr[i])) {
                 return false;
             } else if(!map.containsKey(c)){
-                if(hs.contains(arr[i])){return false;}
+              if(map.containsValue(arr[i])){return false;}
                 else{
                     map.put(c, arr[i]);
-                    hs.add(arr[i]);
+                 
                 }
             }
             else{
