@@ -1,30 +1,45 @@
 class Solution {
-    public int[][] insert(int[][] intervals, int[] newInterval) {
-        List<int[]> result = new ArrayList<>();
-        
-        // Iterate through intervals and add non-overlapping intervals before newInterval
+    public int[][] insert(int[][] arr, int[] newInt) {
+               List<int[]> li = new ArrayList<>();
+  
+        int idx = 0;
+        int start = newInt[0];
+        int end = newInt[1];
+        while (idx < arr.length) {
+            if (arr[idx][0] >= start) {
+                break;
+            }
+            if (arr[idx][0] < start && arr[idx][1] >= start) {
+                start = arr[idx][0];
+                end = Math.max(end, arr[idx][1]);
+                idx++;
+                break;
+            }
+
+            li.add(arr[idx]);
+            idx++;
+
+        }
+        for (int i = idx; i < arr.length; i++) {
+            if (arr[i][0] <= end) {
+                end = Math.max(end, arr[i][1]);
+            } else {
+                int temp[] = { start, end };
+                li.add(temp);
+                start = arr[i][0];
+                end = arr[i][1];
+            }
+        }
+        int temp[] = { start, end };
+        li.add(temp);
+
+        int ans[][] = new int[li.size()][2];
         int i = 0;
-        while (i < intervals.length && intervals[i][1] < newInterval[0]) {
-            result.add(intervals[i]);
+        for (int[] is : li) {
+            ans[i][0] = is[0];
+            ans[i][1] = is[1];
             i++;
         }
-        
-        // Merge overlapping intervals
-        while (i < intervals.length && intervals[i][0] <= newInterval[1]) {
-            newInterval[0] = Math.min(newInterval[0], intervals[i][0]);
-            newInterval[1] = Math.max(newInterval[1], intervals[i][1]);
-            i++;
-        }
-        
-        // Add merged newInterval
-        result.add(newInterval);
-        
-        // Add non-overlapping intervals after newInterval
-        while (i < intervals.length) {
-            result.add(intervals[i]);
-            i++;
-        }
-        
-        return result.toArray(new int[result.size()][]);
+return ans;
     }
 }
