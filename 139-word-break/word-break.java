@@ -63,8 +63,6 @@ class Solution {
         }
         boolean ans = false;
         for (int k = j; k <= s.length(); k++) {
-            String sub = s.substring(i, k);
-
             if (search(s,i,k)) {
                 ans = ans || fn(s, k, k, dp);
             }
