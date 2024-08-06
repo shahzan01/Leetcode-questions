@@ -12,29 +12,13 @@ class Solution {
         for (Character c : map.keySet()) {
             pq.add(c);
         }
-        System.out.println(pq);
+        int i = 0;
         while (!pq.isEmpty()) {
-            int idx = pq.poll() - 'a';
-            if (ch[idx] == 0) {
-                if (count < 8) {
-                    count++;
-                    ch[idx]++;
-                } else if (count < 16) {
-                    count++;
-                    ch[idx] = 2;
-                } else if (count < 24) {
-                    count++;
-                    ch[idx] = 3;
-                } else {
-                    count++;
-                    ch[idx] = 4;
-                }
+            char c = pq.poll();
+            ans += (i / 8 + 1) * map.get(c);
 
-            }
+            i++;
 
-        }
-        for (int i = 0; i < s.length(); i++) {
-            ans += ch[s.charAt(i) - 'a'];
         }return ans;
     }
 }
