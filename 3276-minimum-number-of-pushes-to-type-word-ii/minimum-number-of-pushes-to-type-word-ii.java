@@ -1,24 +1,18 @@
 class Solution {
     public int minimumPushes(String s) {
-              int ch[] = new int[26];
-        int ans = 0;
-        int count = 0;
-        HashMap<Character, Integer> map = new HashMap<>();
+             Integer freq[] = new Integer[26];
+        Arrays.fill(freq, 0);
+
         for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            map.put(c, map.getOrDefault(c, 0) + 1);
+            freq[s.charAt(i) - 'a']++;
         }
-        PriorityQueue<Character> pq = new PriorityQueue<>((a, b) -> map.get(b) - map.get(a));
-        for (Character c : map.keySet()) {
-            pq.add(c);
-        }
-        int i = 0;
-        while (!pq.isEmpty()) {
-            char c = pq.poll();
-            ans += (i / 8 + 1) * map.get(c);
-
-            i++;
-
+        Arrays.sort(freq, Collections.reverseOrder());
+        int ans = 0;
+        for (int i = 0; i < freq.length; i++) {
+            if (freq[i] == 0) {
+                break;
+            }
+            ans += (i / 8 + 1) * freq[i];
         }return ans;
     }
 }
