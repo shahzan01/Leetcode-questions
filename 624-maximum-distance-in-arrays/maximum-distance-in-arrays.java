@@ -1,6 +1,6 @@
 class Solution {
     public int maxDistance(List<List<Integer>> arr) {
-              Collections.sort(arr, (a, b) -> a.get(0) - b.get(0));
+            
                
         int max = 0;
         int samllest = arr.get(0).get(0);
