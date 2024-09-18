@@ -1,10 +1,12 @@
 class Solution {
     public String largestNumber(int[] nums) {
+         int z=0;
          String arr[] = new String[nums.length];
         for (int i = 0; i < arr.length; i++) {
+            if(nums[i]==0){z++;}
             arr[i] = String.valueOf(nums[i]);
         }
-
+if(z==nums.length){return "0";}
         PriorityQueue<String> pq = new PriorityQueue<>(
                 (a, b) -> {
                     String s1 = a + b;
@@ -19,14 +21,7 @@ class Solution {
         while (!pq.isEmpty()) {
             sb.append((pq.poll()));
         }
-                int n=0;
-for(int i=0;i<sb.length();i++){
-    if(sb.charAt(i)=='0'){
-n++;
-    }
-}
 
-if(n==sb.length()){return "0";}
   return sb.toString();
     }
 }
