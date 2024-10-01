@@ -30,19 +30,15 @@ class Solution {
         return true;
     }
     public boolean canArrange(int[] arr, int k) {
-         HashMap<Integer, List<Integer>> map = new HashMap<>();
+                int freq[] = new int[k];
         for (int i = 0; i < arr.length; i++) {
-            int mod = arr[i] % k;
-            if (mod < 0) {
-                mod += k;
-                mod %= k;
-                map.computeIfAbsent(mod, n -> new ArrayList<>()).add(arr[i]);
-
-            } else {
-                map.computeIfAbsent(mod, n -> new ArrayList<>()).add(arr[i]);
-            }
+            freq[((arr[i] % k) + k) % k]++;
         }
-
-       return helper(map, k);
+        if(freq[0]%2!=0){return false;}
+for(int i=1;i<=k/2;i++){
+    if(freq[i]!=freq[k-i]){return false;}
+}
+    
+return true;
     }
 }
