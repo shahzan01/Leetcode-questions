@@ -1,10 +1,17 @@
 class Solution {
     public int minSwaps(String s) {
-          StringBuilder sb = new StringBuilder(s);
+         StringBuilder sb = new StringBuilder(s);
         int ans = 0;
         int openCount = 0;
         int closeCount = 0;
-        int last = sb.length() - 1;
+
+        List<Integer> openIdx = new ArrayList<>();
+        for (int i = sb.length() - 1; i >= 0; i--) {
+            if (sb.charAt(i) == '[') {
+                openIdx.add(i);
+            }
+        }
+        int last = 0;
         for (int i = 0; i < sb.length(); i++) {
             if (sb.charAt(i) == '[') {
                 openCount++;
@@ -12,15 +19,15 @@ class Solution {
                 closeCount++;
             }
             if (closeCount > openCount) {
-                while (sb.charAt(last) != '[') {
-                    last--;
-                }
-                sb.replace(last, last + 1, "]");
+
+                sb.replace(openIdx.get(last), openIdx.get(last) + 1, "]");
                 closeCount--;
                 openCount++;
+                last++;
                 ans++;
             }
-       
-        }return ans;
+
+        }
+return ans;
     }
 }
