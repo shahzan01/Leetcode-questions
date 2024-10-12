@@ -16,7 +16,7 @@ class Solution {
         // Sort start and end times
         Arrays.sort(start_times);
         Arrays.sort(end_times);
-dbg(start_times,end_times);
+
         int end_ptr = 0, group_count = 0;
 
         // Traverse through the start times
