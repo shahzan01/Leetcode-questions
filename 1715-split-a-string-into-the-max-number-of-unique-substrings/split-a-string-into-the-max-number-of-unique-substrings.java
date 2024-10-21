@@ -8,6 +8,9 @@ class Solution {
             return;
         }
         for (int i = idx + 1; i <= s.length(); i++) {
+                    if(s.length()-i+hs.size()<ans){
+                break;
+            }
             String sub = s.substring(idx, i);
 
             if (!hs.contains(sub)) {
