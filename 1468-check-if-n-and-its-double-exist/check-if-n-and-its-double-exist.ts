@@ -1,16 +1,15 @@
 function checkIfExist(arr: number[]): boolean {
-    
+    const map=new Map<number,number>();
 for(let i:number=0;i<arr.length;i++){
-  for(let j:number=0;j<arr.length;j++){
-    if(i==j){continue}
-    if(arr[i]==arr[j]*2){
-      return true;
-    }
+  let x:number=arr[i];
+  if(map.has(x*2)){
+    return true;
   }
+  if(x%2==0 && map.has(x/2)){return true}
+  map.set(x,i)
   
-}
-
-return false;
+  }
+  return false
 
 
 };
